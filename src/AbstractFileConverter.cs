@@ -1,30 +1,23 @@
-abstract class AbstractFileConverter<T>() 
+abstract class AbstractFileConverter
 {
-    const string OUTPUT_EXTENSION = ".jpg";
+    protected const string OUTPUT_EXTENSION = ".jpg";
+    protected string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-    void Conversion(string fileName)
+    public void Conversion(string fileName)
     {
-        string inputFile = SetInputFile(fileName);
-        string inputPath = SetInputPath(inputFile);
+        string inputPath = SetInputPath(fileName);
+        string outputPath = SetOutputPath(fileName);
 
-        T document = GetDocument(inputPath);
-        int pageCount =  GetPageCount(document);
-
-        for (int i = 0; i < pageCount; i++)
-        {
-            var image = SavePageAsImage(document, i);
-        }
+        SavePagesAsImages(inputPath, fileName);
     }
 
     // delegar a clases concretas
-    protected abstract string SetInputFile(string fileName);
-    protected abstract T GetDocument(string inputPath);
-    protected abstract int GetPageCount(T document);
-    protected abstract void SavePageAsImage(T document, int pageNumber);
+    protected abstract string SetInputPath(string fileName);
+    protected abstract void SavePagesAsImages(string inputPath, string outputPath);
 
     // métodos default
-    private string SetInputPath(string inputFile) {
-        return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + inputFile;
+    protected string SetOutputPath(string fileName)
+    {
+        return Path.Combine(defaultPath, fileName + OUTPUT_EXTENSION);
     }
-
 }
