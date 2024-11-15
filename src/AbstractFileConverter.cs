@@ -6,25 +6,27 @@ abstract class AbstractFileConverter<T>
     public void Conversion(string fileName)
     {
         string inputPath = SetInputPath(fileName);
-        // string outputPath = SetOutputPath(fileName);
         T document = GetDocument(inputPath);
         int pageCount = GetPageCount(document);
 
-        for (int i = 0; i < pageCount; i++)
+        Console.WriteLine(pageCount);
+        for (int pageNumber = 0; pageNumber < pageCount; pageNumber++)
         {
-        SavePagesAsImages(inputPath, fileName, i);
+            Console.Write(pageNumber + " ");
+            SavePageAsImage(document, pageNumber, SetOutputPath(fileName, pageNumber));
         }
     }
 
     // delegar a clases concretas
     protected abstract string SetInputPath(string fileName);
-    protected abstract void SavePagesAsImages(T document, string outputPath, int pageNumber);
+    protected abstract void SavePageAsImage(T document, int pageNumber, string outputPath);
     protected abstract T GetDocument(string inputPath);
     protected abstract int GetPageCount(T document);
+    protected abstract void LoadDocumentFile(T document, string inputPath);
 
     // métodos default
-    protected string SetOutputPath(string fileName)
+    protected string SetOutputPath(string fileName, int pageNumber)
     {
-        return Path.Combine(defaultPath, fileName + OUTPUT_EXTENSION);
+        return Path.Combine(defaultPath, fileName + "_" + pageNumber + OUTPUT_EXTENSION);
     }
 }

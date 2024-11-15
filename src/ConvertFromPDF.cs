@@ -2,6 +2,10 @@ using Aspose.Words;
 
 class ConvertFromPDF : AbstractFileConverter<Document>
 {
+    protected override string SetInputPath(string fileName)
+    {
+        throw new NotImplementedException();
+    }
     protected override Document GetDocument(string inputPath)
     {
         throw new NotImplementedException();
@@ -12,12 +16,12 @@ class ConvertFromPDF : AbstractFileConverter<Document>
         throw new NotImplementedException();
     }
 
-    protected override void SavePagesAsImages(string inputPath, string outputPath)
+    protected override void SavePageAsImage(Document document, int pageNumber, string outputPath)
     {
         throw new NotImplementedException();
     }
 
-    protected override string SetInputPath(string fileName)
+    protected override void LoadDocumentFile(Document document, string inputPath)
     {
         throw new NotImplementedException();
     }

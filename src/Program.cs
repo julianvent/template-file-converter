@@ -1,5 +1,4 @@
 ﻿using Pdf = Aspose.Words.Document;
-
 using Word = Spire.Doc.Document;
 
 class Program
