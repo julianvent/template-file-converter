@@ -7,6 +7,7 @@ class Program
     {
         AbstractFileConverter<Word> converter = new ConvertFromDocx();
         AbstractFileConverter<Pdf> pdfConverter = new ConvertFromPDF();
-        converter.Conversion("ejemplo");
+        converter.Conversion("holamundo");
+        pdfConverter.Conversion("holamundo");
     }
 }

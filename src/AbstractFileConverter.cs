@@ -15,14 +15,14 @@ abstract class AbstractFileConverter<T>
             Console.Write(pageNumber + " ");
             SavePageAsImage(document, pageNumber, SetOutputPath(fileName, pageNumber));
         }
+        Console.WriteLine("Conversion terminada");
     }
 
     // delegar a clases concretas
     protected abstract string SetInputPath(string fileName);
-    protected abstract void SavePageAsImage(T document, int pageNumber, string outputPath);
     protected abstract T GetDocument(string inputPath);
     protected abstract int GetPageCount(T document);
-    protected abstract void LoadDocumentFile(T document, string inputPath);
+    protected abstract void SavePageAsImage(T document, int pageNumber, string outputPath);
 
     // métodos default
     protected string SetOutputPath(string fileName, int pageNumber)
