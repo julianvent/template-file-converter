@@ -22,6 +22,10 @@ class ConvertFromDocx : AbstractFileConverter<Document>
         return document.PageCount;
     }
     
+    protected override string SetOutputPath(string fileName, int pageNumber)
+    {
+        return Path.Combine(defaultPath, $"{fileName}_{EXTENSION[1..]}_{pageNumber}{OUTPUT_EXTENSION}");
+    }
 
     protected override void SavePageAsImage(Document docxDocument, int pageNumber, string outputPath)
     {
